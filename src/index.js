@@ -1,16 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MobxApp from './MobxApp';
+import {Provider} from 'mobx-react';
+import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import store from './store/merge'
 
-import {observable, action} from 'mobx'
-class Store {
-  @observable queue = []
-  @action.bound add(){
-    this.queue.push(1)
-  }
-}
-const store = new Store()
-
-ReactDOM.render(<MobxApp store={store} />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>, document.getElementById('root')
+)
 registerServiceWorker();

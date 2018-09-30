@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
-import {observer,PropTypes as ObservablePropTypes} from 'mobx-react'
+import {observer,inject,PropTypes as ObservablePropTypes} from 'mobx-react'
 
+@inject('store')
 @observer
 class App extends Component {
   static propTypes = {
@@ -11,8 +12,12 @@ class App extends Component {
     })
   }
   render() {
+    console.log(this.props.store.queue)
     return (
-      <h2>{this.props.store.queue.length} <button onClick={this.props.store.add}></button></h2>
+      <React.Fragment>
+        {this.props.store.queue.length}
+        <button onClick={this.props.store.add}>增加</button>
+      </React.Fragment>
     )
   }
 }
